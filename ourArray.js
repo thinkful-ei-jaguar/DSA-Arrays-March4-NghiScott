@@ -127,3 +127,32 @@ main();
 //   Float64Array - integers/float datatype only
 // What is the purpose of the _resize() function in your Array class?
 //   Resize function add to the available capacity by copying and pasting old blocks and free up values to create the capacity
+
+
+// #5) 
+
+const URLify = (str) => {
+  let newStr = str //constant O(1)
+  while(newStr.includes(' ')) { //linear O(n) because we don't know how many spaces in the string
+    newStr = newStr.replace(' ', '%20');
+  }
+  return newStr;
+}
+
+// console.log(URLify('www.thinkful.com /tauh ida parv een'));
+
+// #6) 
+//Imagine you have an array of numbers. Write an algorithm to remove all numbers less than 5 from the array. 
+
+const filterArray = (arr) => {
+
+  //every element needs to be checked, no matter size of array, so O(n) linear time complexity
+  for(let i = arr.length - 1; i >= 0; i--) {
+    if(arr[i] < 5) {
+      arr.splice(i, 1) 
+    }
+  }
+  return arr;
+}
+
+console.log(filterArray([1,3,6,7,8]));
