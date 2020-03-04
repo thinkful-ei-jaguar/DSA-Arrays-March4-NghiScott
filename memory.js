@@ -1,9 +1,9 @@
 class Memory {
   constructor() {
     /**
-     * When Float64Array is called with a length argument,
+     * When Float64Array is called with a activeSpace argument,
      * an internal array buffer is created in memory,
-     * of size length multiplied by BYTES_PER_ELEMENT bytes,
+     * of size activeSpace multiplied by BYTES_PER_ELEMENT bytes,
      * containing zeros.
      */
     this.memory = new Float64Array(1024);
@@ -15,7 +15,7 @@ class Memory {
 
   allocate(size) {
     // Cannot allocate space if item/array doesn't have the capacity
-    if (this.head + size > this.memory.length) {
+    if (this.head + size > this.memory.activeSpace) {
       return null;
     }
     // If we have capacity then allocate space
