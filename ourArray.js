@@ -184,4 +184,48 @@ const mergeArray = (arr1, arr2) => {
   return arr3; // O(1)
 };
 
-console.log(mergeArray([1, 3, 6, 8, 11], [2, 3, 5, 8, 9, 10]));
+// console.log(mergeArray([1, 3, 6, 8, 11], [2, 3, 5, 8, 9, 10]));
+
+
+//#9 Write an algorithm that deletes given characters from a string.
+
+// Input:'Battle of the Vowels: Hawaii vs. Grozny', 'aeiou'
+// Output: 'Bttl f th Vwls: Hw vs. Grzny'
+
+// Do not use Javascript's filter, split, or join methods.
+
+const deleteChars = (string, specifiedChars) => {
+  let newStr = string;
+  
+  // start by counting down the string
+  for(let i = newStr.length - 1; i >= 0; i--) {
+    if(specifiedChars.includes(newStr[i])) {
+      newStr = newStr.replace(newStr[i], '');
+    }
+  }
+
+  return newStr;
+}
+
+console.log(deleteChars('Battle of the Vowels: Hawaii vs. Grozny', ['a','e','i','o','u']))
+
+//#10 
+// Given an array of numbers, write an algorithm to find out the products of every other number except the number at each index.
+
+// Input:[1, 3, 9, 4]
+// Output:[108, 36, 12, 27]
+
+const products = (arr) => {
+  let output = [];
+  let product = 1; 
+  for(let i = 0; i < arr.length; i++){ // 1 * 1 = 1 // 3*1 = 3
+    product *= arr[i] //multiplying everything
+  }
+  //by the end of the first for loop, product is = 108. 
+  for(let i = 0; i < arr.length; i++) {
+    output.push(product / arr[i]) //108/1...108/3 
+  }
+  return output
+}
+
+console.log(products([1, 3, 9, 4]));
