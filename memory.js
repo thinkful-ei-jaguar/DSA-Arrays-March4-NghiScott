@@ -5,6 +5,7 @@ class Memory {
      * an internal array buffer is created in memory,
      * of size activeSpace multiplied by BYTES_PER_ELEMENT bytes,
      * containing zeros.
+     * Limits memory to only hold integers/float data type
      */
     this.memory = new Float64Array(1024);
     /**

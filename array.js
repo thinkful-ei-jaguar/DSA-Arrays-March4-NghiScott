@@ -24,7 +24,7 @@ class Array {
     // However since it is common to push elements into arrays, it's a worthwhile optimization
     if (this.length >= this._capacity) {
       // Increase array length x3
-      this._resize((this.length + 1) * Array.SIZE_RATIO); // (0+1) * 3 = 3
+      this._resize((this.length + 1) * Array.SIZE_RATIO); // (0+1) * 3 = 3  - 2nd time is 12x
     }
     // Set a single memory address
     Memory.set(this.ptr + this.length, value); // (0 + 0) , value

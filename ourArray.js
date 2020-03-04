@@ -1,12 +1,12 @@
+const x = require("./memory");
+const memory = new x();
 
-const memory = require('./memory');
 class ourArray {
   constructor() {
     this.activeSpace = 0;
     this.totalSpace = 0;
-    this.ptr = memory.allocate(this.activeSpace)
+    this.ptr = memory.allocate(this.activeSpace);
   }
-
 
   push(value) {
     if (this.activeSpace >= this.totalSpace) {
@@ -19,8 +19,8 @@ class ourArray {
   _resize(size) {
     const oldPtr = this.ptr;
     this.ptr = memory.allocate(size);
-    if(this.ptr === null) {
-      throw new Error('Out of memory');
+    if (this.ptr === null) {
+      throw new Error("Out of memory");
     }
     //linear time complexity
     memory.copy(this.ptr, oldPtr, this.activeSpace);
@@ -29,15 +29,15 @@ class ourArray {
   }
 
   get(index) {
-    if(index < 0 || index >= this.activeSpace) {
+    if (index < 0 || index >= this.activeSpace) {
       throw new Error("Index Error");
     }
     return memory.get(this.ptr + index);
   }
 
   pop() {
-    if(this.activeSpace === 0) {
-      throw new Error('Index Error');
+    if (this.activeSpace === 0) {
+      throw new Error("Index Error");
     }
     const value = memory.get(this.ptr + this.activeSpace - 1);
     this.activeSpace--;
@@ -45,20 +45,24 @@ class ourArray {
   }
 
   insert(index, value) {
-    if(index < 0 || index >= this.activeSpace) {
+    if (index < 0 || index >= this.activeSpace) {
       throw new Error("Index error");
     }
-    if(this.activeSpace >= this.totalSpace) {
+    if (this.activeSpace >= this.totalSpace) {
       this._resize((this.activeSpace + 1) * 3);
     }
-    memory.copy(this.ptr + index + 1, this.ptr + index, this.activeSpace - index);
+    memory.copy(
+      this.ptr + index + 1,
+      this.ptr + index,
+      this.activeSpace - index
+    );
     memory.set(this.ptr + index, value);
     this.activeSpace++;
   }
 
   remove(index) {
-    if(index < 0 || index >= this.activeSpace) {
-      throw new Error('Index error');
+    if (index < 0 || index >= this.activeSpace) {
+      throw new Error("Index error");
     }
     memory.copy(
       this.ptr + index,
@@ -69,44 +73,57 @@ class ourArray {
   }
 }
 
-function main(){
-
+function main() {
   // Create an instance of the Array class
   let arr = new ourArray();
 
   // Add an item to the array
-  arr.push(3);
-  arr.push(5);
-  arr.push(15);
-  arr.push(19);
-  arr.push(45);
-  arr.push(10);
-  arr.pop();
-  arr.pop();
-  arr.pop();
+  // arr.push(3);
+  // arr.push(5);
+  // arr.push(15);
+  // arr.push(19);
+  // arr.push(45);
+  // arr.push(10);
+  // arr.pop();
+  // arr.pop();
+  // arr.pop();
 
   console.log(arr);
 }
 
-main()
+main();
 
-//What is the length, capacity and memory address of your array?
-  //Length = 1
-  //Capacity = 3
-  //Memory Address = 1
+// #2) What is the length, capacity and memory address of your array?
+//  Insert arr.push(3);
+//   Length = 1
+//   Capacity = 3
+//   Memory Address = 0
 
-
-//What is the length, capacity and memory address of your array? Explain the result of your program after adding the new lines of code.
-
-  
-//memory address 1,2,3,4,5,6
-//  arr.push(3); // length is 0 + 1 * 3
-//  arr.push(5); // 
-//  arr.push(15); // another resize takes place, increases capacity to 12 (3+1) * 3)
-//  arr.push(19); 
+// #2) What is the length, capacity and memory address of your array? Explain the result of your program after adding the new lines of code.
+//  arr.push(3); // Resize: length is (0+1) * 3
+//  arr.push(5);
+//  arr.push(15); // Resize: increases capacity to 12 ((3+1) * 3)
+//  arr.push(19);
 //  arr.push(45);
 //  arr.push(10);
+//   Length = 6 // Total active space
+//   Capacity = 12 // Total additional space
+//   Memory address = 3 // Starting position of the new pointer
 
-  //#3 
-    //What is the length, capacity, and address of your array? 
-      //length is 3, capacity is still 12, address is 1, 2, 3, 4, 5, 6
+// #3) What is the length, capacity, and address of your array? Explain the result of your program after adding the new lines of code.
+//  arr.pop();
+//  arr.pop();
+//  arr.pop();
+//   Length = 3 // Total active space
+//   Capacity = 12 // Total space
+//   Memory address = 3
+
+// #4) Print the 1st item in the array arr.
+//   console.log(arr.get(0)); // 3
+// Empty the array and add just 1 item: arr.push("tauhida");
+//   arr.push("tauhida");
+// Print this 1 item that you just added. What is the result? Can you explain your result?
+//   NaN
+//   Float64Array - integers/float datatype only
+// What is the purpose of the _resize() function in your Array class?
+//   Resize function add to the available capacity by copying and pasting old blocks and free up values to create the capacity
