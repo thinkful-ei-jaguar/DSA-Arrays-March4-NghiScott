@@ -128,31 +128,60 @@ main();
 // What is the purpose of the _resize() function in your Array class?
 //   Resize function add to the available capacity by copying and pasting old blocks and free up values to create the capacity
 
+// #5)
 
-// #5) 
-
-const URLify = (str) => {
-  let newStr = str //constant O(1)
-  while(newStr.includes(' ')) { //linear O(n) because we don't know how many spaces in the string
-    newStr = newStr.replace(' ', '%20');
+const URLify = str => {
+  let newStr = str; //constant O(1)
+  while (newStr.includes(" ")) {
+    //linear O(n) because we don't know how many spaces in the string
+    newStr = newStr.replace(" ", "%20");
   }
   return newStr;
-}
+};
 
 // console.log(URLify('www.thinkful.com /tauh ida parv een'));
 
-// #6) 
-//Imagine you have an array of numbers. Write an algorithm to remove all numbers less than 5 from the array. 
+// #6)
+//Imagine you have an array of numbers. Write an algorithm to remove all numbers less than 5 from the array.
 
-const filterArray = (arr) => {
-
+const filterArray = arr => {
   //every element needs to be checked, no matter size of array, so O(n) linear time complexity
-  for(let i = arr.length - 1; i >= 0; i--) {
-    if(arr[i] < 5) {
-      arr.splice(i, 1) 
+  for (let i = arr.length - 1; i >= 0; i--) {
+    if (arr[i] < 5) {
+      arr.splice(i, 1);
     }
   }
   return arr;
-}
+};
 
-console.log(filterArray([1,3,6,7,8]));
+// console.log(filterArray([1,3,6,7,8]));
+
+// #7
+// You are given an array containing positive and negative integers.
+// Write an algorithm which will find the largest sum in a continuous sequence.
+
+const maxSubArray = arr => {
+  sum = 0;
+  max = 0;
+  for (let i = 0; i < arr.length; i++) {
+    // O(n) depends on size of array and runtime increase proportionally
+    sum += arr[i];
+    if (sum > max) {
+      max = sum;
+    }
+  }
+  return max;
+};
+
+// console.log(maxSubArray([4, 6, -3, 5, -2, 1]));
+
+// #8
+// Imagine you have 2 arrays which have already been sorted. Write an algorithm to merge the 2 arrays into a single array, which should also be sorted.
+
+const mergeArray = (arr1, arr2) => {
+  let arr3 = arr1.concat(arr2); // O(1)
+  arr3.sort((a, b) => a - b); // O(n) - runtime depends on array sizes
+  return arr3; // O(1)
+};
+
+console.log(mergeArray([1, 3, 6, 8, 11], [2, 3, 5, 8, 9, 10]));
