@@ -1,14 +1,24 @@
 class Memory {
   constructor() {
+    /**
+     * When Float64Array is called with a length argument,
+     * an internal array buffer is created in memory,
+     * of size length multiplied by BYTES_PER_ELEMENT bytes,
+     * containing zeros.
+     */
     this.memory = new Float64Array(1024);
+    /**
+     * Mimick linked list where head is referencing the first space in an array
+     */
     this.head = 0;
   }
 
   allocate(size) {
+    // Cannot allocate space if item/array doesn't have the capacity
     if (this.head + size > this.memory.length) {
       return null;
     }
-
+    // If we have capacity then allocate space
     let start = this.head;
 
     this.head += size;
@@ -18,6 +28,7 @@ class Memory {
   free(ptr) {}
 
   copy(toIdx, fromIdx, size) {
+    // Shouldn't copy if the location where we're at is the location we want to copy to
     if (fromIdx === toIdx) {
       return;
     }
@@ -36,10 +47,12 @@ class Memory {
   }
 
   get(ptr) {
+    // Similar to how we set values
     return this.memory[ptr];
   }
 
   set(ptr, value) {
+    // Storing value in a memory address called pointer (ptr)
     this.memory[ptr] = value;
   }
 }
