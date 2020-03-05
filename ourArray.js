@@ -88,7 +88,7 @@ function main() {
   // arr.pop();
   // arr.pop();
 
-  console.log(arr);
+  // console.log(arr);
 }
 
 main();
@@ -186,7 +186,6 @@ const mergeArray = (arr1, arr2) => {
 
 // console.log(mergeArray([1, 3, 6, 8, 11], [2, 3, 5, 8, 9, 10]));
 
-
 //#9 Write an algorithm that deletes given characters from a string.
 
 // Input:'Battle of the Vowels: Hawaii vs. Grozny', 'aeiou'
@@ -196,36 +195,89 @@ const mergeArray = (arr1, arr2) => {
 
 const deleteChars = (string, specifiedChars) => {
   let newStr = string;
-  
+
   // start by counting down the string
-  for(let i = newStr.length - 1; i >= 0; i--) {
-    if(specifiedChars.includes(newStr[i])) {
-      newStr = newStr.replace(newStr[i], '');
+  for (let i = newStr.length - 1; i >= 0; i--) {
+    if (specifiedChars.includes(newStr[i])) {
+      newStr = newStr.replace(newStr[i], "");
     }
   }
 
   return newStr;
-}
+};
 
-console.log(deleteChars('Battle of the Vowels: Hawaii vs. Grozny', ['a','e','i','o','u']))
+// console.log(
+//   deleteChars("Battle of the Vowels: Hawaii vs. Grozny", [
+//     "a",
+//     "e",
+//     "i",
+//     "o",
+//     "u"
+//   ])
+// );
 
-//#10 
+//#10
 // Given an array of numbers, write an algorithm to find out the products of every other number except the number at each index.
 
 // Input:[1, 3, 9, 4]
 // Output:[108, 36, 12, 27]
 
-const products = (arr) => {
-  let output = [];
-  let product = 1; 
-  for(let i = 0; i < arr.length; i++){ // 1 * 1 = 1 // 3*1 = 3
-    product *= arr[i] //multiplying everything
+const products = arr => {
+  let output = []; // O(1)
+  let product = 1; // O(1)
+  for (let i = 0; i < arr.length; i++) {
+    // O(n)
+    // 1 * 1 = 1 // 3*1 = 3
+    product *= arr[i]; //multiplying everything
   }
-  //by the end of the first for loop, product is = 108. 
-  for(let i = 0; i < arr.length; i++) {
-    output.push(product / arr[i]) //108/1...108/3 
+  //by the end of the first for loop, product is = 108.
+  for (let i = 0; i < arr.length; i++) {
+    // O(n)
+    output.push(product / arr[i]); //108/1...108/3
   }
-  return output
-}
+  return output;
+};
 
-console.log(products([1, 3, 9, 4]));
+// console.log(products([1, 3, 9, 4]));
+
+//#11
+// Write an algorithm which searches through a 2D array, and whenever it finds a 0 should set the entire row and column to 0.
+
+const replace0 = arr => {
+  for (let i = 0; i < arr.length; i++) {
+    // O(n)
+    if (arr[i].includes(0)) {
+      for (let j = 0; j < arr[i].length; j++) {
+        // O(n)
+        arr[i][j] = 0;
+      }
+    }
+  }
+  return arr;
+};
+
+const input = [
+  [1, 0, 1, 1, 0],
+  [0, 1, 1, 1, 0],
+  [1, 1, 1, 1, 1],
+  [1, 0, 1, 1, 1],
+  [1, 1, 1, 1, 1]
+];
+
+// console.log(replace0(input));
+
+// #12
+// Given 2 strings, str1 and str2, write a program that checks if str2 is a rotation of str1.
+
+const rotation = (str1, str2) => {
+  // Find the indices of str2 that contains the first character of str1
+  // const numOfChar = str2.match(new RegExp(str1[0]) || []).length;
+  // let found = "";
+  // for (let i = ; i >= 0; i--) {
+  //   rotated += str2[i];
+  // }
+  // return str1 === rotated ? true : false;
+};
+
+console.log(rotation("amazon", "azonma")); // false
+console.log(rotation("amazon", "azonam")); // true
