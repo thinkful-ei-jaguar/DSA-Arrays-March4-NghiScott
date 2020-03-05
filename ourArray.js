@@ -202,9 +202,11 @@ const deleteChars = (string, specifiedChars) => {
       newStr = newStr.replace(newStr[i], "");
     }
   }
-
   return newStr;
 };
+
+// Can also use regex and replace to resolve it
+// new RegExp( pattern: `[${chars}])
 
 // console.log(
 //   deleteChars("Battle of the Vowels: Hawaii vs. Grozny", [
@@ -225,31 +227,40 @@ const deleteChars = (string, specifiedChars) => {
 const products = arr => {
   let output = []; // O(1)
   let product = 1; // O(1)
-  for (let i = 0; i < arr.length; i++) {
-    // O(n)
-    // 1 * 1 = 1 // 3*1 = 3
-    product *= arr[i]; //multiplying everything
-  }
+  // Could use reduce to multiply everything
+  product = arr.reduce((a, b) => a * b);
+  // for (let i = 0; i < arr.length; i++) {
+  //   // O(n)
+  //   // 1 * 1 = 1 // 3*1 = 3
+  //   product *= arr[i]; //multiplying everything
+  // }
   //by the end of the first for loop, product is = 108.
-  for (let i = 0; i < arr.length; i++) {
-    // O(n)
-    output.push(product / arr[i]); //108/1...108/3
-  }
+  output = arr.map(i => product / i);
+  // for (let i = 0; i < arr.length; i++) {
+  //   // O(n)
+  //   output.push(product / arr[i]); //108/1...108/3
+  // }
   return output;
 };
 
-// console.log(products([1, 3, 9, 4]));
+console.log(products([1, 3, 9, 4]));
 
 //#11
 // Write an algorithm which searches through a 2D array, and whenever it finds a 0 should set the entire row and column to 0.
 
 const replace0 = arr => {
+  marker = [
+    [x, y],
+    [x, y]
+  ];
   for (let i = 0; i < arr.length; i++) {
     // O(n)
     if (arr[i].includes(0)) {
       for (let j = 0; j < arr[i].length; j++) {
         // O(n)
-        arr[i][j] = 0;
+        if (arr[i][j] === 0) {
+          marker.push([i, j]);
+        }
       }
     }
   }
@@ -271,12 +282,25 @@ const input = [
 
 const rotation = (str1, str2) => {
   // Find the indices of str2 that contains the first character of str1
-  // const numOfChar = str2.match(new RegExp(str1[0]) || []).length;
-  // let found = "";
-  // for (let i = ; i >= 0; i--) {
-  //   rotated += str2[i];
-  // }
-  // return str1 === rotated ? true : false;
+  // Rotate it enough to get get a match
+  const numOfChar = str2.match(new RegExp(str1[0]) || []).length;
+  let found = "";
+  for (let i = 0; i < str1; i++) {
+    found = "";
+    if (str2[i] === str1[0]) {
+      found += str2[i];
+      for (let j = i + 1; j < array.length; j++) {
+        if (j < str1.length - 1) {
+          found += str2[j];
+        } else {
+        }
+      }
+      if (found === str1) {
+        return true;
+      }
+    }
+  }
+  return false;
 };
 
 console.log(rotation("amazon", "azonma")); // false
