@@ -372,7 +372,10 @@ const input = [
 
 const rotation = (str1, str2) => {
   // Key is to concat string 2
-  return (str2 + str2).indexOf(st1) !== -1; // boolean value
+  // index of finds the first index where the entire string is found
+  // If str1 is found entirely in str2, then return index
+  // index return -1 if can't find as such false
+  return (str2 + str2).indexOf(str1) !== -1; // boolean value
 };
 
 console.log(rotation("amazon", "azonma")); // false
